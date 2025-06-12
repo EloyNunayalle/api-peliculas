@@ -43,14 +43,19 @@ def lambda_handler(event, context):
             'pelicula': pelicula,
             'response': response
         }
-
+    
+    
     except Exception as e:
-        # Log de error en formato json estandarizado
+        
+        import traceback
+        # Log de error
         print(json.dumps({
             "tipo": "ERROR",
             "log_datos": {
                 "mensaje": "Error en la creación de la película",
-                "error": str(e)
+                "error": str(e),
+                "evento_original": event,
+                "traceback": traceback.format_exc()
             }
         }))
         return {
